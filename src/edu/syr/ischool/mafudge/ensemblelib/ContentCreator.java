@@ -1,7 +1,5 @@
 package edu.syr.ischool.mafudge.ensemblelib;
 
-//import com.spvsoftwareproducts.blackboard.utils.B2Context;
-
 import blackboard.base.FormattedText;
 import blackboard.data.ValidationException;
 import blackboard.data.content.Content;

@@ -24,7 +24,6 @@
     <bbNG:pageTitleBar iconUrl="../images/powered.by.ensemble.gif" showTitleBar="true" title="${bundle['page.system.index.title']}"/>
     <bbNG:actionControlBar>
       <bbNG:actionButton title="${bundle['page.system.index.button.admin']}" url="admin.jsp" primary="true" />
-      <bbNG:actionButton title="${bundle['page.system.index.button.shared']}" url="sharedweb.jsp" primary="true" />
     </bbNG:actionControlBar>
   </bbNG:pageHeader>
   <bbNG:jsFile href="<%=jQueryPath %>"/> <!--  Note: does not support absolute Url's -->  

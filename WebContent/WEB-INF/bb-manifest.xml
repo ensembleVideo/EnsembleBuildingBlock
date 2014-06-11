@@ -3,12 +3,12 @@
   <!-- core extension information -->
   <plugin>
     <name value= "plugin.name"/>
-    <handle value= "Ensemble-B2"/>
+    <handle value= "Ensemble-Building-Block"/>
     <default-locale value="en_US" />
     <description value= "plugin.description"/>
-    <version value= "3.4.140213"/>
+    <version value= "3.6.140610"/>
     <requires>
-    	<bbversion value="9.1.0"/>
+    	<bbversion value="9.1"/>
     </requires>
     <vendor>
       <id value="ist"/>
@@ -27,8 +27,6 @@
         <handle value= "resource/x-bb-ensemble-vid-mashup"/>
         <http-actions>
 	        <create value="handler/search-vid.jsp"/>
-<!--  	    <modify value="execute/edit"/>
-	        <remove value="execute/remove"/>   -->
         </http-actions>
         <icons>
 	        <toolbar value="/images/handler_icon.gif"/>
@@ -43,35 +41,11 @@
             </type>            
         </types>             
       </content-handler>
-      <!-- Ensemble Playlist Content Handler-->
-      <content-handler> 
-        <name value="Ensemble Playlist"/>
-        <handle value= "resource/x-bb-ensemble-wd-mashup"/>
-        <http-actions>
-	        <create value="handler/web-dest.jsp"/>
-<!--        <modify value="execute/edit"/>
-	        <remove value="execute/remove"/> -->
-        </http-actions>
-        <icons>
-	        <toolbar value="/images/handler_icon.gif"/>
-	        <listitem value="/images/handler_icon.gif"/>
-        </icons>
-        <types>
-            <type>
-                <action-type value="mashup"/>
-            </type>
-            <type>
-                <action-type value="image"/>
-            </type>            
-        </types>             
-      </content-handler>
-
     </content-handlers>
-
     
     <!-- Tools defined by this extension -->
     <application-defs>
-      <application handle="Ensemble-B2" type="shared" use-ssl="false" name="Ensemble Video (In Text Editor)" can-allow-guest="true"  small-icon="" large-icon="/images/handler_icon.gif" is-course-tool="true" is-group-tool="true" is-sys-tool="true" is-org-tool="true">
+      <application handle="Ensemble-Building-Block" type="shared" use-ssl="false" name="Ensemble Video (In Text Editor)" can-allow-guest="true"  small-icon="" large-icon="/images/handler_icon.gif" is-course-tool="true" is-group-tool="true" is-sys-tool="true" is-org-tool="true">
         <description small-icon="/images/handler_icon.gif">Application installed as part of the Ensemble Building Block</description>
         <links>
            <link> <!-- System Tool -->
