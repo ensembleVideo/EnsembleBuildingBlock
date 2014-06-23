@@ -14,6 +14,7 @@
 <%@ taglib uri="/bbNG" prefix="bbNG"%>
 <%@ taglib uri="/bbData" prefix="bbData"%> 
 <%
+	String WYSIWYG_WEBAPP = "/webapps/wysiwyg";
 	B2Context b2Context = new B2Context(request);
 	String jQueryPath = b2Context.getPath() + "js/jquery.min.js";
 	Cookie cookie = null;
@@ -23,6 +24,7 @@
 	String courseId = "";
 	String contentId ="";
 	String returnUrl = "";
+	Boolean isVtbe = false;
 	String title = "Ensemble"; // TODO: ev-script API will need to be extended to support a custom name 
 	cookies = request.getCookies();
 	if( cookies != null ){
@@ -34,6 +36,8 @@
 		         courseId = cookie.getValue();
 	      } else if ((cookie.getName()).compareTo("content_id") == 0 ){
 		         contentId = cookie.getValue();
+	      } else if ((cookie.getName()).compareTo("is_vtbe") == 0 ) {
+	      		 isVtbe = Boolean.parseBoolean(cookie.getValue());
 	      }
 	   }
 	}	
@@ -44,9 +48,18 @@
 	String embedUrl = request.getParameter("url"); 
 	// id=\"ensembleEmbeddedContent_xbyH5uJUtkmEb8XZJxfpfQ\" 
 	String embedHtml = "<iframe src=\"" + embedUrl + "\"  frameborder=\"0\" style=\"width:"+ width + "px;height:"+ height + "px;\" height=\""+ height + "\" width=\""+ width + "\" allowfullscreen></iframe>";	
-	// create the content item
-	ContentCreator cc = new ContentCreator();
-	cc.createContent(title, embedHtml,courseId, contentId);
+	
+	// Check whether or not we came from vtbe
+	if (isVtbe) {
+		// Process the vtbe, then redirect.
+	    request.setAttribute( "embedHtml", embedHtml );
+	    String vtbeEmbedUrl = PlugInUtil.getInsertToVtbePostUrl().replace( WYSIWYG_WEBAPP, "" );
+	    RequestDispatcher rd = getServletContext().getContext( WYSIWYG_WEBAPP ).getRequestDispatcher( vtbeEmbedUrl );
+	    rd.forward( request, response );
+	} else {
+		// create the content item, show the page, and redirect
+		ContentCreator cc = new ContentCreator();
+		cc.createContent(title, embedHtml,courseId, contentId);	
 
 // Use Markup and Javascript to redirect parent page back to main blackboard content page    
 %>
@@ -65,3 +78,6 @@
 	 </script>
 </bbNG:genericPage>
 
+<% 
+	} // end if (isVtbe)
+%>

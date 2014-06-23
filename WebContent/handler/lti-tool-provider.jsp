@@ -6,8 +6,9 @@
 <%@page import="com.spvsoftwareproducts.blackboard.utils.B2Context" errorPage="../error.jsp"%>
 <%@page import="blackboard.platform.blti.*"  errorPage="../error.jsp"%>
 <%
-
-	// These will be needed for OAUTH implementation, retrieved from settings, of course
+	// This script sets up the launch of the Ensemble LTI Provider
+	
+	// TODO: These will be needed for OAUTH implementation, retrieved from settings, of course
 	String SERVER_NAME = "server-name";
 	String API_KEY = "api-key";
     String DOMAIN = "domain";
@@ -15,29 +16,8 @@
 	
 	B2Context b2Context = new B2Context(request);
 	pageContext.setAttribute("bundle", b2Context.getResourceStrings());
-	String courseId = request.getParameter("course_id");
-	String contentId = request.getParameter("content_id");
-	String ref  = request.getMethod().equalsIgnoreCase("POST") ? 
-			request.getParameter("http_ref")!= null ? request.getParameter("http_ref") : ""   : 
-			request.getHeader("referer")!= null ? URLEncoder.encode(request.getHeader("referer"),"UTF-8") : "";
 
-	// process url depends on whether we arrived via VTBE or not.
-	boolean isVtbe = request.getParameter("vtbe") != null ? true : false;
-	String processUrl = b2Context.getServerUrl() + b2Context.getPath() + "handler/" +(isVtbe ? "vtbe-search-vid-process.jsp" : "search-vid-process.jsp");
-	
-	// Setup cookies. these need to be saved so we can redirect back to where we came
-	int expires = 60*60*24; // 24 hours
-	Cookie httpRefCookie = new Cookie("http_ref", ref);
-	Cookie courseIdCookie = new Cookie("course_id", courseId);
-	Cookie contentIdCookie = new Cookie("content_id", contentId);
-	httpRefCookie.setMaxAge(expires); 
-	courseIdCookie.setMaxAge(expires);
-	contentIdCookie.setMaxAge(expires);
-	response.addCookie( httpRefCookie );
-	response.addCookie( courseIdCookie );
-	response.addCookie( contentIdCookie );
-
-	String returnUrl = processUrl; // + "&product=canvas"; //&content_id=" + contentId + "&course_id=" + courseId + "&http_ref=" +ref;
+	String returnUrl = b2Context.getServerUrl() + b2Context.getPath() + "handler/process.jsp";
 	
 	// Basic LTI Setup / Handoff / get these from B2context.
 	String launchUrl = "http://ensembledev/app/lti/launch.ashx";

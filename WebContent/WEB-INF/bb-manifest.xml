@@ -6,7 +6,7 @@
     <handle value= "Ensemble-Building-Block"/>
     <default-locale value="en_US" />
     <description value= "plugin.description"/>
-    <version value= "3.6.140610"/>
+    <version value= "3.6.140623"/>
     <requires>
     	<bbversion value="9.1"/>
     </requires>
@@ -26,7 +26,7 @@
         <name value="Ensemble Video"/>
         <handle value= "resource/x-bb-ensemble-vid-mashup"/>
         <http-actions>
-	        <create value="handler/search-vid.jsp"/>
+	        <create value="handler/search.jsp"/>
         </http-actions>
         <icons>
 	        <toolbar value="/images/handler_icon.gif"/>
@@ -60,7 +60,7 @@
 		  <link> <!--course Mashup Entry Point For Ensemble Video-->
 			   <type value="vtbe_mashup_course" />
 			   <name value="Ensemble Video" />
-			   <url value="handler/search-vid.jsp?vtbe=true&amp;course_id=@X@course.pk_string@X@" />
+			   <url value="handler/search.jsp?vtbe=true&amp;course_id=@X@course.pk_string@X@" />
 			   <description value="Embed Ensemble Video" />
 		 	   <icons>
 		 		 <listitem value="/images/handler_icon.gif"></listitem>

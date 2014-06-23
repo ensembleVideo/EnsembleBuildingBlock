@@ -27,15 +27,37 @@
 	String ref  = request.getMethod().equalsIgnoreCase("POST") ? 
 			request.getParameter("http_ref")!= null ? request.getParameter("http_ref") : ""   : 
 			request.getHeader("referer")!= null ? URLEncoder.encode(request.getHeader("referer"),"UTF-8") : "";
-	String processUrl = b2Context.getServerUrl() + b2Context.getPath() + "handler/lti-launch.jsp?vtbe=" + Boolean.toString(isVtbe);
+			
+	String courseId = request.getParameter("course_id");
+	String contentId = request.getParameter("content_id");
+	
+	// Setup cookies. these need to be saved so we can redirect back to where we came
+	int expires = 60*60*24; // 24 hours
+	Cookie httpRefCookie = new Cookie("http_ref", ref);
+	Cookie courseIdCookie = new Cookie("course_id", courseId);
+	Cookie contentIdCookie = new Cookie("content_id", contentId);
+	Cookie isVtbeCookie = new Cookie("is_vtbe", Boolean.toString(isVtbe));
+	
+	httpRefCookie.setMaxAge(expires); 
+	courseIdCookie.setMaxAge(expires);
+	contentIdCookie.setMaxAge(expires);
+	isVtbeCookie.setMaxAge(expires);
+	response.addCookie( httpRefCookie );
+	response.addCookie( courseIdCookie );
+	response.addCookie( contentIdCookie );
+	response.addCookie( isVtbeCookie );
+					
+	String processUrl = b2Context.getServerUrl() + b2Context.getPath() + "handler/lti-tool-provider.jsp";
+	
+	// if Vtbe, then process the launch, no iframe required.
+	if (isVtbe) {
+		response.sendRedirect(processUrl);
+	}
 %>
 	
 <bbNG:pageHeader instructions="Search Ensemble Video">
     <bbNG:pageTitleBar iconUrl="../images/powered.by.ensemble.gif" showTitleBar="true" title="Search for a video to add through this interface."/>
 </bbNG:pageHeader>
 <iframe style="width: 100%; height: 560px;" src="<%=processUrl %>"></iframe>
-<p>DEBUG:<br />
-processUrl = <%=processUrl %> <br>
-</p>
 </bbNG:learningSystemPage>
 </bbData:context>
