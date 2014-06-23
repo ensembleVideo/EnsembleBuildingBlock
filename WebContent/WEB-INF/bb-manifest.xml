@@ -78,7 +78,8 @@
       <permission type="attribute" name="user.authinfo" actions="get,set"/>
       <permission type="attribute" name="user.personalinfo" actions="get,set"/>
   	  <permission name="suppressAccessChecks" type="java.lang.reflect.ReflectPermission"  />    
-	  <permission type="socket" name="*" actions="connect,resolve"/>  	
+	  <permission type="socket" name="*" actions="connect,resolve"/>  
+	  <permission type="basiclti" name="*" action="sendname,sendemail,sendroles" />	
 	</permissions>
   </plugin>
 
