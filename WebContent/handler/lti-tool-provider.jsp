@@ -26,7 +26,7 @@
 		customParams.put("user_id", ec.buildUsernameWithDomain(b2Context.getContext().getUser().getUserName()));	
 	}	
 	customParams.put( BasicLTIConstants.PARAM_RESOURCE_LINK_TITLE, "Ensemble Video");
-	customParams.put( BasicLTIConstants.PARAM_TOOL_CONSUMMER_INFO_CODE, "canvas");	//TODO: Says canvas for now
+	customParams.put( BasicLTIConstants.PARAM_TOOL_CONSUMMER_INFO_CODE, "bblearn");	
 	
 	BasicLTILauncher launcher = new BasicLTILauncher(ec.getLaunchUrl(), ec.getConsumerKey(), ec.getSharedSecret(), ec.getResourceId())
 		.addCurrentCourseInformation()
