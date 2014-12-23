@@ -6,7 +6,7 @@
     <handle value= "Ensemble-Building-Block"/>
     <default-locale value="en_US" />
     <description value= "plugin.description"/>
-    <version value= "3.6.140623"/>
+    <version value= "3.6.141221"/>
     <requires>
     	<bbversion value="9.1"/>
     </requires>

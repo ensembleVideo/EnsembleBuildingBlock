@@ -25,7 +25,6 @@
 	String contentId ="";
 	String returnUrl = "";
 	Boolean isVtbe = false;
-	String title = "Ensemble"; // TODO: ev-script API will need to be extended to support a custom name 
 	cookies = request.getCookies();
 	if( cookies != null ){
 	   for (int i = 0; i < cookies.length; i++){
@@ -43,6 +42,8 @@
 	}	
 	
 	// build the content HTML page
+	// TODO: ev-script API will need to be extended to support a custom name
+	String title = request.getParameter("title") == null ? "Ensemble" : request.getParameter("title");  
 	String height = request.getParameter("height");
 	String width = request.getParameter("width");
 	String embedUrl = request.getParameter("url"); 
