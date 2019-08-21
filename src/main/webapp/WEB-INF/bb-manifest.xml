@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.blackboard.com/bb-manifest-plugin"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.blackboard.com/bb-manifest-plugin https://maven.blackboard.com/content/repositories/releases/blackboard/platform/bb-manifest-plugin/9.1.110082.0/bb-manifest-plugin-9.1.110082.0.xsd">
+  <plugin>
+
+    <name value= "plugin.name"/>
+    <handle value= "Ensemble-Building-Block"/>
+    <description value= "plugin.description"/>
+    <default-locale value="en_US" />
+
+    <version value= "3.6.190820"/>
+    <requires>
+    	<bbversion value="9.1"/>
+    </requires>
+
+    <vendor>
+      <id value="ensemblevideo"/>
+      <name value="Ensemble Video"/>
+      <url value="https://ensemblevideo.com" />
+      <description value="plugin.vendor.description" />
+    </vendor>
+
+	  <http-actions>
+  		<config value="system/index.jsp" />
+	  </http-actions>
+
+    <!-- Tools defined by this extension -->
+    <application-defs>
+      <application handle="Ensemble-Building-Block" type="shared" use-ssl="false" name="Ensemble Video (In Text Editor)" can-allow-guest="true"  small-icon="" large-icon="/images/handler_icon.gif" is-course-tool="true" is-group-tool="true" is-sys-tool="true" is-org-tool="true">
+        <description small-icon="/images/handler_icon.gif">Application installed as part of the Ensemble Building Block</description>
+        <links>
+           <link> <!-- System Tool -->
+            <type value="system_tool"/>
+            <name value="Ensemble Settings"/>
+            <url value="system/index.jsp" />
+            <description value="Administer the Ensemble Video Building Block" />
+            <icons>
+              <listitem value="images/ensemble.icon.gif"/>
+            </icons>
+          </link>
+          <link> <!--course Mashup Entry Point For Ensemble Video-->
+             <type value="vtbe_mashup_course" />
+             <name value="Ensemble Video" />
+             <url value="handler/search.jsp?vtbe=true&amp;course_id=@X@course.pk_string@X@" />
+             <description value="Embed Ensemble Video" />
+             <icons>
+             <listitem value="/images/handler_icon.gif"></listitem>
+             <toolbar value="/images/handler_icon.gif"></toolbar>
+             </icons>
+         </link>
+        </links>
+      </application>
+    </application-defs>
+
+    <content-handlers>
+      <!-- Ensemble Content Type Handler. -->
+      <content-handler>
+        <name value="Ensemble Video"/>
+        <handle value= "resource/x-bb-ensemble-vid-mashup"/>
+        <http-actions>
+	        <create value="handler/search.jsp"/>
+        </http-actions>
+        <icons>
+	        <toolbar value="/images/handler_icon.gif"/>
+	        <listitem value="/images/handler_icon.gif"/>
+        </icons>
+        <types>
+          <type>
+            <action-type value="mashup"/>
+          </type>
+          <type>
+            <action-type value="image"/>
+          </type>
+        </types>
+      </content-handler>
+    </content-handlers>
+
+    <!-- code permissions required for proper operation -->
+    <permissions>
+      <permission type="persist" name="Content" actions="create,modify,delete"/>
+      <permission type="attribute" name="user.authinfo" actions="get,set"/>
+      <permission type="attribute" name="user.personalinfo" actions="get,set"/>
+  	  <permission name="suppressAccessChecks" type="java.lang.reflect.ReflectPermission"  />
+  	  <permission type="socket" name="*" actions="connect,resolve"/>
+  	  <permission type="basiclti" name="*" action="sendname,sendemail,sendroles" />
+  	</permissions>
+
+  </plugin>
+
+</manifest>
