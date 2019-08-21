@@ -12,3 +12,8 @@
 hs_err_pid*
 /.gradle/
 /build/
+
+# Gradle-generated Eclipse files
+.settings
+.classpath
+.project
